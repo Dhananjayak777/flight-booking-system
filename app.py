@@ -170,7 +170,6 @@ def booking_history():
         history = cur.fetchall()
     return render_template('booking_history.html', history=history)
 
-print("ci/cdhhh")
 
 if __name__ == '__main__':
     app.run(debug=True)
