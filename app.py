@@ -41,9 +41,11 @@ def init_db():
 
 init_db()
 
+
 @app.route('/')
 def home():
     return redirect('/login')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,6 +59,7 @@ def register():
             con.commit()
         return redirect('/login')
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -76,6 +79,7 @@ def login():
                 return "Invalid credentials"
     return render_template('login.html')
 
+
 @app.route('/admin')
 def admin_dashboard():
     if session.get('role') != 'admin':
@@ -85,6 +89,7 @@ def admin_dashboard():
     cur.execute("SELECT * FROM flights")
     flights = cur.fetchall()
     return render_template('admin_dashboard.html', flights=flights)
+
 
 @app.route('/add_flight', methods=['GET', 'POST'])
 def add_flight():
@@ -100,6 +105,7 @@ def add_flight():
         return redirect('/admin')
     return render_template('add_flight.html')
 
+
 @app.route('/delete_flight/<int:id>')
 def delete_flight(id):
     if session.get('role') != 'admin':
@@ -110,6 +116,7 @@ def delete_flight(id):
         con.commit()
     return redirect('/admin')
 
+
 @app.route('/user')
 def user_dashboard():
     if session.get('role') != 'user':
@@ -119,6 +126,7 @@ def user_dashboard():
     cur.execute("SELECT * FROM flights")
     flights = cur.fetchall()
     return render_template('user_dashboard.html', flights=flights)
+
 
 @app.route('/book_flight/<int:flight_id>')
 def book_flight(flight_id):
@@ -137,6 +145,7 @@ def book_flight(flight_id):
         else:
             return "No seats available!"
     return redirect('/user')
+
 
 @app.route('/logout')
 def logout():
@@ -161,7 +170,7 @@ def booking_history():
         history = cur.fetchall()
     return render_template('booking_history.html', history=history)
 
-print("ci/cd")
+print("ci/cdhhh")
 
 if __name__ == '__main__':
     app.run(debug=True)
